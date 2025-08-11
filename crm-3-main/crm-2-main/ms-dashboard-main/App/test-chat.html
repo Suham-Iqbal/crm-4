@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        button { padding: 10px 15px; margin: 5px; }
+        input { padding: 8px; margin: 5px; width: 200px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Chat Test Page</h1>
+    
+    <div class="test-section">
+        <h3>Test Chat Message</h3>
+        <input type="text" id="senderEmail" placeholder="Sender Email" value="qasim@gmail.com">
+        <input type="text" id="receiverEmail" placeholder="Receiver Email" value="ali@gmail.com">
+        <input type="text" id="message" placeholder="Message" value="Test message">
+        <input type="text" id="username" placeholder="Username" value="Qasim">
+        <br>
+        <button onclick="testSendMessage()">Send Test Message</button>
+        <button onclick="testGetHistory()">Get Chat History</button>
+        <button onclick="testGetUsers()">Get Users</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>Logs</h3>
+        <div id="logs" class="log"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            logs.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            console.log(message);
+        }
+
+        async function testSendMessage() {
+            const senderEmail = document.getElementById('senderEmail').value;
+            const receiverEmail = document.getElementById('receiverEmail').value;
+            const message = document.getElementById('message').value;
+            const username = document.getElementById('username').value;
+
+            log('=== Testing Send Message ===');
+            log(`Sender: ${senderEmail}`);
+            log(`Receiver: ${receiverEmail}`);
+            log(`Message: ${message}`);
+            log(`Username: ${username}`);
+
+            try {
+                const response = await fetch('/api/chat/message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        senderEmail: senderEmail,
+                        receiverEmail: receiverEmail,
+                        message: message,
+                        username: username
+                    })
+                });
+
+                log(`Response Status: ${response.status}`);
+                log(`Response OK: ${response.ok}`);
+
+                const data = await response.json();
+                log(`Response Data: ${JSON.stringify(data, null, 2)}`);
+
+                if (data.success) {
+                    log('✅ Message sent successfully!');
+                } else {
+                    log(`❌ Error: ${data.message}`);
+                }
+            } catch (error) {
+                log(`❌ Network Error: ${error.message}`);
+            }
+        }
+
+        async function testGetHistory() {
+            const senderEmail = document.getElementById('senderEmail').value;
+            const receiverEmail = document.getElementById('receiverEmail').value;
+
+            log('=== Testing Get Chat History ===');
+            log(`User1: ${senderEmail}`);
+            log(`User2: ${receiverEmail}`);
+
+            try {
+                const response = await fetch(`/api/chat/history?user1Email=${senderEmail}&user2Email=${receiverEmail}`);
+                
+                log(`Response Status: ${response.status}`);
+                log(`Response OK: ${response.ok}`);
+
+                const data = await response.json();
+                log(`Response Data: ${JSON.stringify(data, null, 2)}`);
+
+                if (data.success) {
+                    log(`✅ Found ${data.messages.length} messages`);
+                } else {
+                    log(`❌ Error: ${data.message}`);
+                }
+            } catch (error) {
+                log(`❌ Network Error: ${error.message}`);
+            }
+        }
+
+        async function testGetUsers() {
+            log('=== Testing Get Users ===');
+
+            try {
+                const response = await fetch('/api/users');
+                
+                log(`Response Status: ${response.status}`);
+                log(`Response OK: ${response.ok}`);
+
+                const data = await response.json();
+                log(`Response Data: ${JSON.stringify(data, null, 2)}`);
+
+                if (data.users) {
+                    log(`✅ Found ${data.users.length} users`);
+                } else {
+                    log(`❌ No users found`);
+                }
+            } catch (error) {
+                log(`❌ Network Error: ${error.message}`);
+            }
+        }
+
+        // Test on page load
+        window.onload = function() {
+            log('Page loaded. Server should be running on localhost:3000');
+            testGetUsers();
+        };
+    </script>
+</body>
+</html>

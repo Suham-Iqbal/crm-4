@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Login / Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="welcome-panel" id="welcomePanel">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1>Hello, Welcome!</h1>
+                    <p id="welcomeMessage">Don't have an account?</p>
+                </div>
+                <button class="switch-btn" id="switchBtn">Register</button>
+            </div>
+        </div>
+
+        <div class="form-panel" id="formPanel">
+            <div class="form-container">
+           
+                <div class="form-section" id="loginForm">
+                    <div class="form-header">
+                        <h2>Login</h2>
+                    </div>
+                    
+                    <form id="loginFormElement" class="auth-form">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="loginUsername" name="username" placeholder="Email" required>
+                                <span class="input-icon">👤</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="password" id="loginPassword" name="password" placeholder="........" required>
+                                <span class="input-icon">🔒</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span>Login</span>
+                        </button>
+                    </form>
+                    
+                    <div class="social-login">
+                        <div class="separator">
+                            <span>or login with social platforms</span>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="social-btn" type="button">G</button>
+                            <button class="social-btn" type="button">f</button>
+                            <button class="social-btn" type="button">🐙</button>
+                            <button class="social-btn" type="button">in</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="form-section hidden" id="signupForm">
+                    <div class="form-header">
+                        <h2>Register</h2>
+                    </div>
+                    
+                    <form id="signupFormElement" class="auth-form">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="signupName" name="username" placeholder="Full Name" required>
+                                <span class="input-icon">👤</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+                                <span class="input-icon">📧</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                                <span class="input-icon">🔒</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="password" id="signupConfirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                                <span class="input-icon">🔒</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span>Register</span>
+                        </button>
+                    </form>
+                    
+                    <div class="social-login">
+                        <div class="separator">
+                            <span>or register with social platforms</span>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="social-btn" type="button">G</button>
+                            <button class="social-btn" type="button">f</button>
+                            <button class="social-btn" type="button">🐙</button>
+                            <button class="social-btn" type="button">in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

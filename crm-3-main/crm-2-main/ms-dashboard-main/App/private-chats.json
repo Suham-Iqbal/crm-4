@@ -1,0 +1,78 @@
+{
+  "privateChat_ali@gmail.com_suham@gmail.com": [
+    {
+      "email": "ali@gmail.com",
+      "username": "ali@gmail.com",
+      "text": "hi",
+      "timestamp": "2025-08-10T19:52:49.444Z"
+    },
+    {
+      "email": "suham@gmail.com",
+      "username": "suham@gmail.com",
+      "text": "helo",
+      "timestamp": "2025-08-11T10:56:34.375Z"
+    }
+  ],
+  "privateChat_ali@gmail.com_qasim@gmail.com": [
+    {
+      "email": "ali@gmail.com",
+      "username": "ali@gmail.com",
+      "text": "hi",
+      "timestamp": "2025-08-10T19:53:02.573Z"
+    },
+    {
+      "email": "qasim@gmail.com",
+      "username": "qasim@gmail.com",
+      "text": "hello",
+      "timestamp": "2025-08-10T19:58:41.480Z"
+    },
+    {
+      "email": "qasim@gmail.com",
+      "username": "qasim@gmail.com",
+      "text": "Nice to see you / It's great to see you / Good to see you. ...",
+      "timestamp": "2025-08-11T09:13:40.321Z"
+    }
+  ],
+  "privateChat_kashif@gmail.com_qasim@gmail.com": [
+    {
+      "email": "kashif@gmail.com",
+      "username": "kashif@gmail.com",
+      "text": "hello",
+      "timestamp": "2025-08-11T06:46:49.222Z"
+    },
+    {
+      "email": "kashif@gmail.com",
+      "username": "kashif@gmail.com",
+      "text": "hi",
+      "timestamp": "2025-08-11T07:14:55.661Z"
+    },
+    {
+      "email": "kashif@gmail.com",
+      "username": "kashif@gmail.com",
+      "text": "j",
+      "timestamp": "2025-08-11T07:18:58.256Z"
+    },
+    {
+      "email": "qasim@gmail.com",
+      "username": "qasim@gmail.com",
+      "text": "hey",
+      "timestamp": "2025-08-11T07:19:59.515Z"
+    }
+  ],
+  "privateChat_iqbal@gmail.com_kashif@gmail.com": [
+    {
+      "email": "kashif@gmail.com",
+      "username": "kashif@gmail.com",
+      "text": "k",
+      "timestamp": "2025-08-11T06:51:51.617Z"
+    }
+  ],
+  "privateChat_kashif@gmail.com_suham@gmail.com": [
+    {
+      "email": "kashif@gmail.com",
+      "username": "kashif@gmail.com",
+      "text": "hello",
+      "timestamp": "2025-08-11T06:57:17.094Z"
+    }
+  ]
+}

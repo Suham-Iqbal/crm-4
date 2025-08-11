@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard 2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #6c757d 75%, #212529 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 3D Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Glassmorphic Container */
+        .dashboard-container {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            margin: 1rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: #212529;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #212529, #6c757d, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #212529;
+        }
+
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #212529, #6c757d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            color: #212529;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #212529, #6c757d, #ffffff);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Metrics */
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #212529, #6c757d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-change {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .positive { color: #2ecc71; }
+        .negative { color: #e74c3c; }
+
+        /* Progress Bars */
+        .progress-container {
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #212529, #6c757d, #ffffff);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+            animation: progressFlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes progressFlow {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+
+        /* Chart Container */
+        .chart-container {
+            grid-column: 1 / -1;
+            height: 400px;
+            position: relative;
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding-left: 0.5rem;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #212529, #6c757d);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #212529, #6c757d);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #212529, #6c757d);
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="logo">CRM Dashboard</div>
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <div>
+                    
+                    <div style="font-size: 0.8rem; opacity: 0.7;">CRM Dashboard</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Total Revenue</div>
+                    <div class="card-icon">💰</div>
+                </div>
+                <div class="metric-value">$847.2K</div>
+                <div class="metric-change positive">
+                    ↗ +12.5% from last month
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Active Users</div>
+                    <div class="card-icon">👥</div>
+                </div>
+                <div class="metric-value">24.8K</div>
+                <div class="metric-change positive">
+                    ↗ +8.2% from last week
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Conversion Rate</div>
+                    <div class="card-icon">📈</div>
+                </div>
+                <div class="metric-value">3.24%</div>
+                <div class="metric-change negative">
+                    ↘ -2.1% from yesterday
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 64%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Server Health</div>
+                    <div class="card-icon">⚡</div>
+                </div>
+                <div class="metric-value">99.8%</div>
+                <div class="metric-change positive">
+                    ↗ All systems operational
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 99%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card chart-container">
+                <div class="card-header">
+                    <div class="card-title">Performance Analytics</div>
+                    <div class="card-icon">📊</div>
+                </div>
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Recent Activity</div>
+                    <div class="card-icon">🔔</div>
+                </div>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>New user registration</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">2 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>Payment processed successfully</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">5 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>Server maintenance completed</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">12 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>Database backup created</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">1 hour ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>API rate limit updated</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">3 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="fab">+</button>
+
+    <script>
+        // 3D Background Animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Create floating particles
+        const geometry = new THREE.SphereGeometry(0.1, 8, 8);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff, 
+            transparent: true, 
+            opacity: 0.6 
+        });
+        
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            const particle = new THREE.Mesh(geometry, material);
+            particle.position.x = (Math.random() - 0.5) * 50;
+            particle.position.y = (Math.random() - 0.5) * 50;
+            particle.position.z = (Math.random() - 0.5) * 50;
+            particles.push(particle);
+            scene.add(particle);
+        }
+        
+        camera.position.z = 20;
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particles.forEach(particle => {
+                particle.rotation.x += 0.01;
+                particle.rotation.y += 0.01;
+                particle.position.y += Math.sin(Date.now() * 0.001) * 0.001;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        // Chart.js Integration
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [65, 78, 90, 81, 96, 105],
+                    borderColor: 'rgba(33, 37, 41, 1)',
+                    backgroundColor: 'rgba(33, 37, 41, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Users',
+                    data: [45, 67, 73, 88, 92, 98],
+                    borderColor: 'rgba(108, 117, 125, 1)',
+                    backgroundColor: 'rgba(108, 117, 125, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#212529'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: 'rgba(33, 37, 41, 0.7)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'rgba(33, 37, 41, 0.7)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Dynamic Updates
+        setInterval(() => {
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                if (Math.random() > 0.7) {
+                    metric.style.animation = 'pulse 0.5s';
+                    setTimeout(() => {
+                        metric.style.animation = '';
+                    }, 500);
+                }
+            });
+        }, 3000);
+
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Load CRM Data from Backend
+        async function loadCRMData() {
+            try {
+                const response = await fetch('/api/dashboard-stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    updateDashboard(data);
+                } else {
+                    console.log('Using static data');
+                }
+            } catch (error) {
+                console.log('Error loading data:', error);
+            }
+        }
+
+        // Update Dashboard with Real Data
+        function updateDashboard(data) {
+            // Update metrics with real data
+            document.querySelector('.metric-value').textContent = `$${(data.totalUsers * 1000).toLocaleString()}`;
+            document.querySelectorAll('.metric-value')[1].textContent = data.activeUsers.toLocaleString();
+            document.querySelectorAll('.metric-value')[2].textContent = `${((data.completedDeals / data.totalDeals) * 100).toFixed(1)}%`;
+            document.querySelectorAll('.metric-value')[3].textContent = `${((data.completedTasks / data.totalTasks) * 100).toFixed(1)}%`;
+
+            // Update progress bars
+            document.querySelectorAll('.progress-fill')[0].style.width = `${(data.activeUsers / data.totalUsers) * 100}%`;
+            document.querySelectorAll('.progress-fill')[1].style.width = `${(data.activeUsers / data.totalUsers) * 100}%`;
+            document.querySelectorAll('.progress-fill')[2].style.width = `${(data.completedDeals / data.totalDeals) * 100}%`;
+            document.querySelectorAll('.progress-fill')[3].style.width = `${(data.completedTasks / data.totalTasks) * 100}%`;
+
+            // Update activity feed
+            if (data.activities) {
+                const activityFeed = document.querySelector('.activity-feed');
+                activityFeed.innerHTML = '';
+                data.activities.forEach(activity => {
+                    const item = document.createElement('div');
+                    item.className = 'activity-item';
+                    item.innerHTML = `
+                        <div class="activity-dot"></div>
+                        <div>
+                            <div>${activity.message}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">${activity.time}</div>
+                        </div>
+                    `;
+                    activityFeed.appendChild(item);
+                });
+            }
+        }
+
+        // FAB interaction
+        document.querySelector('.fab').addEventListener('click', () => {
+            alert('Add new widget or feature!');
+        });
+
+        // Smooth scroll behavior
+        document.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible) {
+                    card.style.transform = `translateY(${-window.scrollY * 0.1}px)`;
+                }
+            });
+        });
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCRMData();
+        });
+
+        // Real-time updates every 30 seconds
+        setInterval(() => {
+            loadCRMData();
+        }, 30000);
+    </script>
+</body>
+</html>

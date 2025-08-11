@@ -1,0 +1,452 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f0f2f5;
+    color: #000000;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container */
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Welcome Panel (Black & Gray) */
+.welcome-panel {
+    width: 300px;
+    background: linear-gradient(135deg, #6b7280 0%, #1f2937 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.welcome-panel.slide-right {
+    transform: translateX(600px);
+}
+
+.welcome-content {
+    text-align: center;
+    width: 100%;
+}
+
+.welcome-text h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.welcome-text p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.switch-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.switch-btn:hover {
+    background: #ffffff;
+    color: #6b7280;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Form Panel (White) */
+.form-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #ffffff;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.form-panel.slide-left {
+    transform: translateX(-300px);
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.form-section {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.form-section.hidden {
+    opacity: 0;
+    transform: translateX(20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    letter-spacing: -0.01em;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 50px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #ffffff;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: #6b7280;
+    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1);
+}
+
+.input-wrapper input::placeholder {
+    color: #999999;
+}
+
+.input-icon {
+    position: absolute;
+    right: 15px;
+    font-size: 1.2rem;
+    color: #999999;
+    pointer-events: none;
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.forgot-link {
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: #4b5563;
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(135deg, #6b7280 0%, #1f2937 100%);
+    color: #ffffff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Social Login */
+.social-login {
+    text-align: center;
+}
+
+.separator {
+    position: relative;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e5e5;
+}
+
+.separator span {
+    background: #ffffff;
+    padding: 0 1rem;
+    color: #666666;
+    font-size: 0.875rem;
+    position: relative;
+    z-index: 1;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-btn:hover {
+    border-color: #6b7280;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+}
+
+/* Loading States */
+.submit-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.submit-btn.loading span {
+    opacity: 0;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.form-group.error input {
+    border-color: #dc3545;
+}
+
+.form-group.error .error-message {
+    color: #dc3545;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+/* Success States */
+.form-group.success input {
+    border-color: #28a745;
+}
+
+/* Focus States */
+.form-group input:focus {
+    border-color: #6b7280;
+    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1);
+}
+
+/* Hover Effects */
+.form-group input:hover {
+    border-color: #cccccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        max-width: 400px;
+        height: auto;
+        min-height: 600px;
+        flex-direction: column;
+    }
+    
+    .welcome-panel {
+        width: 100%;
+        height: 200px;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .welcome-panel.slide-right {
+        transform: translateY(-200px);
+    }
+    
+    .form-panel {
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .form-panel.slide-left {
+        transform: translateY(200px);
+    }
+    
+    .welcome-text h1 {
+        font-size: 2rem;
+    }
+    
+    .form-header h2 {
+        font-size: 2rem;
+    }
+    
+    .social-buttons {
+        gap: 0.5rem;
+    }
+    
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    
+    .welcome-panel {
+        border-radius: 0;
+    }
+    
+    .form-panel {
+        border-radius: 0;
+    }
+    
+    .welcome-text h1 {
+        font-size: 1.75rem;
+    }
+    
+    .form-header h2 {
+        font-size: 1.75rem;
+    }
+    
+    .input-wrapper input {
+        padding: 12px 15px;
+        padding-right: 45px;
+    }
+    
+    .submit-btn {
+        padding: 12px 15px;
+    }
+}
+
+/* Smooth Transitions */
+* {
+    transition: all 0.2s ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .form-group input {
+        border-width: 3px;
+    }
+    
+    .submit-btn {
+        border: 2px solid #6b7280;
+    }
+}

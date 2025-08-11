@@ -1,0 +1,60 @@
+{
+  "signupRecords": [
+    {
+      "username": "Qasim",
+      "email": "qasim@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "08-07-2025 07:44 PM"
+    },
+    {
+      "username": "ali",
+      "email": "ali@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "08-07-2025 07:47 PM"
+    },
+    {
+      "username": "Arsalan",
+      "email": "arsalan@gmail.com",
+      "password": "123",
+      "userType": "admin",
+      "signupDate": "2025-08-08T07:28:17.629Z"
+    },
+    {
+      "username": "suham",
+      "email": "suham@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "2025-08-08T08:01:37.070Z"
+    },
+    {
+      "username": "iqbal",
+      "email": "iqbal@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "2025-08-08T08:02:26.416Z"
+    },
+    {
+      "username": "khan",
+      "email": "khan@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "2025-08-08T10:06:44.743Z"
+    },
+    {
+      "username": "Uzair",
+      "email": "uzair@gmail.com",
+      "password": "123",
+      "userType": "regular",
+      "signupDate": "2025-08-08T10:29:44.221Z"
+    },
+    {
+      "username": "kashif",
+      "email": "kashif@gmail.com",
+      "password": "123456",
+      "userType": "regular",
+      "signupDate": "2025-08-11T05:07:15.032Z"
+    }
+  ]
+}

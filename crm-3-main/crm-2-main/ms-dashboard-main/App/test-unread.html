@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unread Message Counter Test</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        .test-section h3 {
+            color: #374151;
+            margin-top: 0;
+        }
+        
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+            margin: 5px;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+        }
+        
+        .test-button.danger {
+            background: #dc3545;
+        }
+        
+        .test-button.danger:hover {
+            background: #c82333;
+        }
+        
+        .test-button.success {
+            background: #28a745;
+        }
+        
+        .test-button.success:hover {
+            background: #218838;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .info-box h4 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li::before {
+            content: "✅ ";
+            margin-right: 8px;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔔 Unread Message Counter Test</h1>
+        
+        <div class="info-box">
+            <h4>How the Unread Message Counter Works:</h4>
+            <ol>
+                <li><strong>User opens messaging app</strong> → App checks for unread messages</li>
+                <li><strong>Unread message counter</strong> → Shows number at top of messages section</li>
+                <li><strong>Dynamic updates</strong> → Number changes automatically when:
+                    <ul>
+                        <li>New message arrives (number increases)</li>
+                        <li>You read a message (number decreases)</li>
+                    </ul>
+                </li>
+                <li><strong>Purpose</strong> → Quick overview of unread messages without checking each chat</li>
+            </ol>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Test Functions</h3>
+            <p>Use these buttons to test the unread message counter functionality:</p>
+            
+            <button class="test-button" onclick="testAddUnread()">
+                ➕ Add Test Unread Message
+            </button>
+            
+            <button class="test-button success" onclick="testOpenChat()">
+                📖 Simulate Opening Chat
+            </button>
+            
+            <button class="test-button danger" onclick="testClearAll()">
+                🗑️ Clear All Unread Counts
+            </button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Features Implemented</h3>
+            <ul class="feature-list">
+                <li>Self-chat prevention (users can't chat with themselves)</li>
+                <li>Unread message counter system</li>
+                <li>Dynamic badge updates in navigation</li>
+                <li>Automatic message polling every 5 seconds</li>
+                <li>Unread counts in active chats list</li>
+                <li>Messages marked as read when chat is opened</li>
+                <li>Animated unread badges with pulse effect</li>
+                <li>Total unread count in private chat menu</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎯 How to Test</h3>
+            <div class="status info">
+                1. Go to your main app and log in<br>
+                2. Navigate to "Private Chat" → "Active Chats"<br>
+                3. Use the test buttons above to simulate messages<br>
+                4. Watch the unread badges appear and update!
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔧 Technical Details</h3>
+            <p><strong>Files Modified:</strong></p>
+            <ul>
+                <li><code>script.js</code> - Added unread counter system and polling</li>
+                <li><code>style.css</code> - Enhanced badge animations</li>
+                <li><code>login.js</code> - Fixed email format issues</li>
+            </ul>
+            
+            <p><strong>Key Functions:</strong></p>
+            <ul>
+                <li><code>incrementUnreadCount()</code> - Adds to unread count</li>
+                <li><code>clearUnreadCount()</code> - Clears unread count</li>
+                <li><code>updateUnreadBadges()</code> - Updates all badges</li>
+                <li><code>startMessagePolling()</code> - Checks for new messages</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function testAddUnread() {
+            if (typeof testUnreadMessages === 'function') {
+                testUnreadMessages();
+            } else {
+                alert('Please open this test in the main app context to use test functions!');
+            }
+        }
+        
+        function testOpenChat() {
+            alert('This would simulate opening a chat and clearing unread counts.\n\nIn the real app, this happens automatically when you click on a chat.');
+        }
+        
+        function testClearAll() {
+            if (typeof unreadCounts !== 'undefined') {
+                unreadCounts = {};
+                if (typeof updateUnreadBadges === 'function') {
+                    updateUnreadBadges();
+                }
+                alert('All unread counts cleared!');
+            } else {
+                alert('Please open this test in the main app context to use test functions!');
+            }
+        }
+        
+        // Check if we're in the main app context
+        if (typeof loggedInUser === 'undefined') {
+            document.querySelector('.test-container').innerHTML += `
+                <div class="status info">
+                    <strong>Note:</strong> This test page works best when opened from within the main CRM app.
+                    The test functions need access to the app's JavaScript context.
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

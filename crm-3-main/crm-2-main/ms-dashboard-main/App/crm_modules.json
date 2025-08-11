@@ -1,0 +1,88 @@
+{
+  "modules": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "icon": "🏠",
+      "subSections": [
+        { "id": "overview", "name": "Overview" },
+        { "id": "reports", "name": "Reports" },
+        { "id": "analytics", "name": "Analytics" }
+      ]
+    },
+    {
+      "id": "customers",
+      "name": "Customers",
+      "icon": "👤",
+      "subSections": [
+        { "id": "all-customers", "name": "All Customers" },
+        { "id": "leads", "name": "Leads" },
+        { "id": "accounts", "name": "Accounts" },
+        { "id": "contacts", "name": "Contacts" }
+      ]
+    },
+    {
+      "id": "deals",
+      "name": "Deals",
+      "icon": "💰",
+      "subSections": [
+        { "id": "active-deals", "name": "Active Deals" },
+        { "id": "closed-deals", "name": "Closed Deals" },
+        { "id": "pipeline-view", "name": "Pipeline View" },
+        { "id": "forecasting", "name": "Forecasting" }
+      ]
+    },
+    {
+      "id": "tasks",
+      "name": "Tasks",
+      "icon": "📋",
+      "subSections": [
+        { "id": "my-tasks", "name": "My Tasks" },
+        { "id": "team-tasks", "name": "Team Tasks" },
+        { "id": "overdue-tasks", "name": "Overdue Tasks" },
+        { "id": "calendar", "name": "Calendar" }
+      ]
+    },
+    {
+      "id": "campaigns",
+      "name": "Campaigns",
+      "icon": "📢",
+      "subSections": [
+        { "id": "active-campaigns", "name": "Active Campaigns" },
+        { "id": "past-campaigns", "name": "Past Campaigns" },
+        { "id": "templates", "name": "Templates" }
+      ]
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "icon": "🎧",
+      "subSections": [
+        { "id": "open-tickets", "name": "Open Tickets" },
+        { "id": "resolved-tickets", "name": "Resolved Tickets" },
+        { "id": "knowledge-base", "name": "Knowledge Base" }
+      ]
+    },
+    {
+      "id": "private-chat",
+      "name": "Private Chat",
+      "icon": "💬",
+      "subSections": [
+        { "id": "find-user", "name": "Find User to Chat" },
+        { "id": "active-chats", "name": "Active Chats" },
+        { "id": "chat-history", "name": "Chat History" }
+      ]
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "icon": "⚙️",
+      "subSections": [
+        { "id": "user-management", "name": "User Management" },
+        { "id": "integrations", "name": "Integrations" },
+        { "id": "preferences", "name": "Preferences" },
+        { "id": "data-import-export", "name": "Data Import/Export" }
+      ]
+    }
+  ]
+}
